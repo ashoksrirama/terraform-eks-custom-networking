@@ -127,7 +127,7 @@ Add new Managed node group:
 terraform apply -auto-approve
 ```
 
-Delete existing Managed node group:
+Delete existing Managed node group so that existing pods are moved to new managed node group:
 
 ```yaml
   eks_managed_node_groups = {
@@ -152,7 +152,9 @@ kubectl get pods -A -o wide
 ```
 
 ```text
-  
+NAME                       READY   STATUS    RESTARTS   AGE   IP               NODE                                          NOMINATED NODE   READINESS GATES
+inflate-7849c696cd-2bdnh   1/1     Running   0          16m   100.64.95.52     ip-10-50-17-81.us-west-2.compute.internal     <none>           <none>
+inflate-7849c696cd-6ttvb   1/1     Running   0          16m   100.64.138.158   ip-10-50-37-95.us-west-2.compute.internal     <none>           <none>
 ```
 
 You have successfully enabled the Custom Networking in your EKS cluster.
@@ -168,3 +170,7 @@ terraform destroy -target="module.eks_blueprints_addons" -auto-approve
 terraform destroy -target="module.eks" -auto-approve
 terraform destroy -auto-approve
 ```
+
+## License
+
+This library is licensed under the MIT-0 License. See the [LICENSE](LICENSE) file.
